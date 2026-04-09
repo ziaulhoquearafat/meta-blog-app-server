@@ -4,6 +4,9 @@ const port = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const blogRoutes = require("./src/routes/blog.routes");
+app.use("/blogs", blogRoutes);
+
 // mongoose configuration BY ATLAS
 // async function main() {
 //   await mongoose.connect(
