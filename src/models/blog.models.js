@@ -14,7 +14,7 @@ const BlogSchema = new mongoose.Schema({
     required: true,
   },
   author: {
-    type: String,
+    name: String,
     image: String,
   },
   createdAt: {
