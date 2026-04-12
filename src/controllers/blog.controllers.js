@@ -12,6 +12,25 @@ const getAllBlogs = async (req, res) => {
   }
 };
 
+// get single blogs by id
+const getSingleBlogs = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const blog = await Blog.findById(id);
+    if (!blog) {
+      return res.status(401).send({ message: "blog not found" });
+    }
+    res.status(201).send({
+      message: "Fetch blog successfully",
+      blog,
+    });
+  } catch (error) {
+    console.log("Error fatching blog by id", error);
+    res.status(500).send({ message: "Error fatching blog by id", error });
+  }
+};
+
 module.exports = {
   getAllBlogs,
+  getSingleBlogs,
 };

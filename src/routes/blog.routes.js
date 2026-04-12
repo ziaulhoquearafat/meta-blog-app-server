@@ -1,28 +1,16 @@
 const express = require("express");
 const Blog = require("../models/blog.models");
-const { getAllBlogs } = require("../controllers/blog.controllers");
+const {
+  getAllBlogs,
+  getSingleBlogs,
+} = require("../controllers/blog.controllers");
 const router = express.Router();
 
 // get all blogs
 router.get("/", getAllBlogs);
 
 // get single blogs by _id
-router.get("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const blog = await Blog.findById(id);
-    if (!blog) {
-      return res.status(401).send({ message: "blog not found" });
-    }
-    res.status(201).send({
-      message: "Fetch blog successfully",
-      blog,
-    });
-  } catch (error) {
-    console.log("Error fatching blog by id", error);
-    res.status(500).send({ message: "Error fatching blog by id", error });
-  }
-});
+router.get("/:id", getSingleBlogs);
 
 // post a new blogs
 router.post("/add-post", async (req, res) => {
