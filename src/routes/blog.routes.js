@@ -46,6 +46,7 @@ router.post("/add-post", async (req, res) => {
   }
 });
 
+// deleted single blogs by id
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
