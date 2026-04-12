@@ -30,7 +30,23 @@ const getSingleBlogs = async (req, res) => {
   }
 };
 
+// post a new blogs
+
+const postAnewBlog = async (req, res) => {
+  try {
+    const blog = new Blog({
+      ...req.body,
+    });
+    await blog.save();
+    res.status(201).send({ message: "Creating blog Successfully", blog });
+  } catch (error) {
+    console.log("Error Creating blog", error);
+    res.status(500).send({ message: "Error Creating Blog", error });
+  }
+};
+
 module.exports = {
   getAllBlogs,
   getSingleBlogs,
+  postAnewBlog,
 };

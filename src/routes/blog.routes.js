@@ -3,6 +3,7 @@ const Blog = require("../models/blog.models");
 const {
   getAllBlogs,
   getSingleBlogs,
+  postAnewBlog,
 } = require("../controllers/blog.controllers");
 const router = express.Router();
 
@@ -13,18 +14,7 @@ router.get("/", getAllBlogs);
 router.get("/:id", getSingleBlogs);
 
 // post a new blogs
-router.post("/add-post", async (req, res) => {
-  try {
-    const blog = new Blog({
-      ...req.body,
-    });
-    await blog.save();
-    res.status(201).send({ message: "Creating blog Successfully", blog });
-  } catch (error) {
-    console.log("Error Creating blog", error);
-    res.status(500).send({ message: "Error Creating Blog", error });
-  }
-});
+router.post("/add-post", postAnewBlog);
 
 // deleted single blogs by id
 router.delete("/:id", async (req, res) => {
