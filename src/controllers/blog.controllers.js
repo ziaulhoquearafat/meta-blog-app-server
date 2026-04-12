@@ -45,8 +45,24 @@ const postAnewBlog = async (req, res) => {
   }
 };
 
+// delete a blog
+const deleteABlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteBlog = await Blog.findByIdAndDelete(id);
+    if (!deleteBlog) {
+      res.status(404).send({ message: "page not found" });
+    }
+    res.status(200).send({ message: "Deleted Blog Successfully", deleteBlog });
+  } catch (error) {
+    console.log("Error to delete blog", error);
+    res.status(500).send({ message: "Error to delete blog", error });
+  }
+};
+
 module.exports = {
   getAllBlogs,
   getSingleBlogs,
   postAnewBlog,
+  deleteABlog,
 };

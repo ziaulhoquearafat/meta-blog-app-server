@@ -4,6 +4,7 @@ const {
   getAllBlogs,
   getSingleBlogs,
   postAnewBlog,
+  deleteABlog,
 } = require("../controllers/blog.controllers");
 const router = express.Router();
 
@@ -17,19 +18,7 @@ router.get("/:id", getSingleBlogs);
 router.post("/add-post", postAnewBlog);
 
 // deleted single blogs by id
-router.delete("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deleteBlog = await Blog.findByIdAndDelete(id);
-    if (!deleteBlog) {
-      res.status(404).send({ message: "page not found" });
-    }
-    res.status(200).send({ message: "Deleted Blog Successfully", deleteBlog });
-  } catch (error) {
-    console.log("Error to delete blog", error);
-    res.status(500).send({ message: "Error to delete blog", error });
-  }
-});
+router.delete("/:id", deleteABlog);
 
 router.put("/:id", async (req, res) => {
   try {
