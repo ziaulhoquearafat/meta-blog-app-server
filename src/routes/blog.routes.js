@@ -64,7 +64,7 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const updateBlog = Blog.findByIdAndUpdate(id, req.body);
+    const updateBlog = await Blog.findByIdAndUpdate(id, req.body);
     if (!updateBlog) {
       return res.status(404).send({ message: "Blog not Found" });
     }
