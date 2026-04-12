@@ -1,18 +1,10 @@
 const express = require("express");
 const Blog = require("../models/blog.models");
+const { getAllBlogs } = require("../controllers/blog.controllers");
 const router = express.Router();
 
 // get all blogs
-router.get("/", async (req, res) => {
-  try {
-    const blogs = await Blog.find().sort({ createdAt: -1 });
-    // console.log(blogs);
-    res.status(201).send({ message: "Blog data fetch successfully", blogs });
-  } catch (error) {
-    console.log("Fetching Data Error", error);
-    res.status(500).send({ message: "Fetching Data Error", error });
-  }
-});
+router.get("/", getAllBlogs);
 
 // get single blogs by _id
 router.get("/:id", async (req, res) => {
