@@ -18,7 +18,7 @@ const getSingleBlogs = async (req, res) => {
     const { id } = req.params;
     const blog = await Blog.findById(id);
     if (!blog) {
-      return res.status(401).send({ message: "blog not found" });
+      return res.status(404).send({ message: "blog not found" });
     }
     res.status(200).send({
       message: "Fetch blog successfully",
